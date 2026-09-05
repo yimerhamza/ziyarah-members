@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIYARAH BUSINESS GROUP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2d4a7a 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.3);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-icon {
+            font-size: 32px;
+            background: rgba(255,255,255,0.15);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .brand-text h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .brand-text p {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1a365d;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 10px 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            color: #1a202c;
+            margin-bottom: 12px;
+        }
+
+        .hero h2 span {
+            color: #1a365d;
+        }
+
+        .hero p {
+            color: #718096;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 14px 40px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-hero-primary {
+            background: #1a365d;
+            color: white;
+        }
+
+        .btn-hero-primary:hover {
+            background: #15304f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(26, 54, 93, 0.3);
+        }
+
+        .btn-hero-secondary {
+            background: #e2e8f0;
+            color: #1a202c;
+        }
+
+        .btn-hero-secondary:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a365d;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .hero h2 {
+                font-size: 28px;
+            }
+            .hero {
+                padding: 30px 20px;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="brand">
+                <div class="brand-icon">✦</div>
+                <div class="brand-text">
+                    <h1>ZIYARAH BUSINESS GROUP</h1>
+                    <p>Member Portal</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="/register" class="btn-primary">Register Now</a>
+                <a href="/admin" class="btn-outline">Admin Login</a>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="hero">
+            <h2>Welcome to <span>ZIYARAH</span> Business Community</h2>
+            <p>Join a growing network of business professionals. Register today and become part of our exclusive community.</p>
+            <div class="hero-buttons">
+                <a href="/register" class="btn-hero btn-hero-primary">✦ Register Now</a>
+                <a href="/admin" class="btn-hero btn-hero-secondary">Admin Dashboard</a>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Networking</h3>
+                <p>Connect with business professionals and expand your network</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Growth</h3>
+                <p>Access exclusive business resources and growth opportunities</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Recognition</h3>
+                <p>Get recognized as a member of a prestigious business group</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <h3>Opportunities</h3>
+                <p>Discover new business opportunities and partnerships</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMembers">0</div>
+                <div class="stat-label">Total Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="vipMembers">0</div>
+                <div class="stat-label">VIP Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="premiumMembers">0</div>
+                <div class="stat-label">Premium Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="corporateMembers">0</div>
+                <div class="stat-label">Corporate Members</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 ZIYARAH BUSINESS GROUP. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        // Load stats
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/members');
+                const members = await response.json();
+                
+                document.getElementById('totalMembers').textContent = members.length;
+                document.getElementById('vipMembers').textContent = members.filter(m => m.membership_type === 'VIP').length;
+                document.getElementById('premiumMembers').textContent = members.filter(m => m.membership_type === 'Premium').length;
+                document.getElementById('corporateMembers').textContent = members.filter(m => m.membership_type === 'Corporate').length;
+            } catch (err) {
+                console.error('Error loading stats:', err);
+            }
+        }
+
+        loadStats();
+    </script>
+</body>
+</html>

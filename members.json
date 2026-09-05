@@ -1,0 +1,51 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "first_name": "Ahmed",
+      "last_name": "Hassan",
+      "email": "ahmed@ziyarah.com",
+      "phone": "+1 555-0101",
+      "company": "Ziyarah HQ",
+      "dob": "1985-03-15",
+      "membership_type": "VIP",
+      "created_at": "2026-09-05T05:53:46.011Z"
+    },
+    {
+      "id": 2,
+      "first_name": "Fatima",
+      "last_name": "Ali",
+      "email": "fatima@ziyarah.com",
+      "phone": "+1 555-0102",
+      "company": "Ziyarah Marketing",
+      "dob": "1990-07-22",
+      "membership_type": "Premium",
+      "created_at": "2026-09-05T05:53:46.012Z"
+    },
+    {
+      "id": 3,
+      "first_name": "Omar",
+      "last_name": "Said",
+      "email": "omar@ziyarah.com",
+      "phone": "+1 555-0103",
+      "company": "Ziyarah Finance",
+      "dob": "1988-11-30",
+      "membership_type": "Regular",
+      "created_at": "2026-09-05T05:53:46.012Z"
+    },
+    {
+      "id": 4,
+      "first_name": "yimer",
+      "last_name": "Hamza",
+      "email": "yimerhamza@gmail.com",
+      "phone": "+251929185861",
+      "company": "gghhg",
+      "position": "Officer",
+      "dob": "2026-09-05",
+      "membership_type": "Regular",
+      "status": "active",
+      "registered_at": "2026-09-05T06:30:32.833Z"
+    }
+  ],
+  "nextId": 5
+}

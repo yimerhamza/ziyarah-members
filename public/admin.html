@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ZIYARAH BUSINESS GROUP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-left h1 {
+            font-size: 22px;
+            color: #1a202c;
+        }
+
+        .header-left h1 span {
+            color: #1a365d;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1a365d;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #15304f;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .btn-danger {
+            background: #fc8181;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1a365d;
+            border: 2px solid #1a365d;
+        }
+
+        .btn-outline:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a365d;
+        }
+
+        .stat-card .label {
+            color: #718096;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .table-header h2 {
+            color: #1a202c;
+            font-size: 18px;
+        }
+
+        .search-box {
+            padding: 8px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 250px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #1a365d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f7fafc;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2d3748;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-pending {
+            background: #fefcbf;
+            color: #975a16;
+        }
+
+        .status-inactive {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-buttons .btn {
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        .btn-edit {
+            background: #bee3f8;
+            color: #2a69ac;
+        }
+
+        .btn-edit:hover {
+            background: #90cdf4;
+        }
+
+        .btn-delete {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+
+        .btn-delete:hover {
+            background: #feb2b2;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #1a202c;
+        }
+
+        .modal-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #a0aec0;
+        }
+
+        .modal-close:hover {
+            color: #1a202c;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .table-header {
+                flex-direction: column;
+            }
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div style="font-size:24px;">✦</div>
+                <h1>ZIYARAH <span>Admin</span></h1>
+            </div>
+            <div class="header-actions">
+                <a href="/" class="btn btn-outline">← Back to Home</a>
+                <a href="/register" class="btn btn-primary">+ Add Member</a>
+                <button class="btn btn-danger" onclick="refreshData()">🔄 Refresh</button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="number" id="totalMembers">0</div>
+                <div class="label">Total Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="activeMembers">0</div>
+                <div class="label">Active Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="pendingMembers">0</div>
+                <div class="label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="vipCount">0</div>
+                <div class="label">VIP Members</div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h2>👥 Members Directory</h2>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <input type="text" class="search-box" id="searchInput" placeholder="Search members..." onkeyup="filterTable()" />
+                    <select id="filterType" onchange="filterTable()" style="padding:8px 14px;border:2px solid #e2e8f0;border-radius:8px;">
+                        <option value="all">All Types</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Premium">Premium</option>
+                        <option value="VIP">VIP</option>
+                        <option value="Corporate">Corporate</option>
+                    </select>
+                </div>
+            </div>
+            <div id="membersTable">
+                <div class="empty-state">
+                    <div class="icon">📋</div>
+                    <p>Loading members...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Edit Member</h2>
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="editForm">
+                <input type="hidden" id="editId" />
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-weight:600;font-size:14px;">First Name</label>
+                    <input type="text" id="editFirstName" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-weight:600;font-size:14px;">Last Name</label>
+                    <input type="text" id="editLastName" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-weight:600;font-size:14px;">Email</label>
+                    <input type="email" id="editEmail" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-weight:600;font-size:14px;">Phone</label>
+                    <input type="text" id="editPhone" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-weight:600;font-size:14px;">Company</label>
+                    <input type="text" id="editCompany" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="font-weight:600;font-size:14px;">Position</label>
+                    <input type="text" id="editPosition" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:16px;">
+                    <label style="font-weight:600;font-size:14px;">Membership Type</label>
+                    <select id="editMembershipType" style="width:100%;padding:8px 12px;border:2px solid #e2e8f0;border-radius:8px;">
+                        <option value="Regular">Regular</option>
+                        <option value="Premium">Premium</option>
+                        <option value="VIP">VIP</option>
+                        <option value="Corporate">Corporate</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success" style="width:100%;padding:12px;">💾 Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let members = [];
+
+        // Load members
+        async function loadMembers() {
+            try {
+                const response = await fetch('/api/members');
+                members = await response.json();
+                renderTable(members);
+                updateStats(members);
+            } catch (err) {
+                console.error('Error loading members:', err);
+                document.getElementById('membersTable').innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">❌</div>
+                        <p>Error loading members. Please refresh.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Update stats
+        function updateStats(data) {
+            document.getElementById('totalMembers').textContent = data.length;
+            document.getElementById('activeMembers').textContent = data.filter(m => m.status === 'active').length;
+            document.getElementById('pendingMembers').textContent = data.filter(m => m.status === 'pending').length;
+            document.getElementById('vipCount').textContent = data.filter(m => m.membership_type === 'VIP').length;
+        }
+
+        // Render table
+        function renderTable(data) {
+            if (!data || data.length === 0) {
+                document.getElementById('membersTable').innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📋</div>
+                        <p>No members registered yet.</p>
+                        <a href="/register" class="btn btn-primary" style="margin-top:12px;display:inline-block;">Register First Member</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.forEach(m => {
+                const statusClass = m.status === 'active' ? 'status-active' : m.status === 'pending' ? 'status-pending' : 'status-inactive';
+                html += `
+                    <tr>
+                        <td>${m.id}</td>
+                        <td><strong>${escapeHtml(m.first_name)} ${escapeHtml(m.last_name)}</strong></td>
+                        <td>${escapeHtml(m.email)}</td>
+                        <td>${escapeHtml(m.company || '—')}</td>
+                        <td><span class="status-badge" style="background:#bee3f8;color:#2a69ac;">${escapeHtml(m.membership_type || 'Regular')}</span></td>
+                        <td><span class="status-badge ${statusClass}">${escapeHtml(m.status || 'pending')}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-edit" onclick="editMember(${m.id})">✏️</button>
+                                <button class="btn btn-delete" onclick="deleteMember(${m.id})">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            document.getElementById('membersTable').innerHTML = html;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // Filter table
+        function filterTable() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const type = document.getElementById('filterType').value;
+            
+            let filtered = members.filter(m => {
+                const nameMatch = (m.first_name + ' ' + m.last_name).toLowerCase().includes(search) ||
+                                 m.email.toLowerCase().includes(search) ||
+                                 (m.company && m.company.toLowerCase().includes(search));
+                const typeMatch = type === 'all' || m.membership_type === type;
+                return nameMatch && typeMatch;
+            });
+            
+            renderTable(filtered);
+        }
+
+        // Delete member
+        async function deleteMember(id) {
+            if (!confirm('Are you sure you want to delete this member?')) return;
+
+            try {
+                const response = await fetch(`/api/members/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Delete failed');
+                
+                alert('✅ Member deleted successfully!');
+                loadMembers();
+            } catch (err) {
+                alert('❌ Error: ' + err.message);
+            }
+        }
+
+        // Edit member
+        async function editMember(id) {
+            try {
+                const response = await fetch(`/api/members/${id}`);
+                const member = await response.json();
+                
+                document.getElementById('editId').value = member.id;
+                document.getElementById('editFirstName').value = member.first_name;
+                document.getElementById('editLastName').value = member.last_name;
+                document.getElementById('editEmail').value = member.email;
+                document.getElementById('editPhone').value = member.phone || '';
+                document.getElementById('editCompany').value = member.company || '';
+                document.getElementById('editPosition').value = member.position || '';
+                document.getElementById('editMembershipType').value = member.membership_type || 'Regular';
+                
+                document.getElementById('editModal').classList.add('active');
+            } catch (err) {
+                alert('Error loading member: ' + err.message);
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        // Handle edit form
+        document.getElementById('editForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('editId').value;
+            const data = {
+                firstName: document.getElementById('editFirstName').value,
+                lastName: document.getElementById('editLastName').value,
+                email: document.getElementById('editEmail').value,
+                phone: document.getElementById('editPhone').value,
+                company: document.getElementById('editCompany').value,
+                position: document.getElementById('editPosition').value,
+                membershipType: document.getElementById('editMembershipType').value
+            };
+
+            try {
+                const response = await fetch(`/api/members/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) throw new Error('Update failed');
+                
+                alert('✅ Member updated successfully!');
+                closeModal();
+                loadMembers();
+            } catch (err) {
+                alert('❌ Error: ' + err.message);
+            }
+        });
+
+        // Refresh data
+        function refreshData() {
+            loadMembers();
+        }
+
+        // Close modal on background click
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Load on start
+        loadMembers();
+
+        console.log('✅ ZIYARAH Admin Dashboard loaded');
+    </script>
+</body>
+</html>

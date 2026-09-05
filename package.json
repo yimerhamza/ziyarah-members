@@ -1,0 +1,12 @@
+{
+  "name": "ziyarah-sqlite",
+  "version": "1.0.0",
+  "description": "ZIYARAH BUSINESS GROUP with SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.6"
+  }
+}
